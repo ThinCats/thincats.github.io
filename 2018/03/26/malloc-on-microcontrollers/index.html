@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言 当时接触malloc实现的这个任务时, 感觉难度挺大的, 以往从未深入地了解过所用malloc的真正实现. 这两天断断续续抽出时间阅读了CS:APP的相关章节部分以及阅读了大佬们Blog, 感觉有必要记录一下 malloc 简单原理及部分实现   系统通过brk指针来维护堆(heap)的映射空间(Mapped Region), 当需要未映射空间时, brk指针将向上移动获取更多的映射空间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于CS:APP的单片机malloc简单实现">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/malloc-on-microcontrollers/index.html">
+<meta property="og:site_name" content="Welcome">
+<meta property="og:description" content="前言 当时接触malloc实现的这个任务时, 感觉难度挺大的, 以往从未深入地了解过所用malloc的真正实现. 这两天断断续续抽出时间阅读了CS:APP的相关章节部分以及阅读了大佬们Blog, 感觉有必要记录一下 malloc 简单原理及部分实现   系统通过brk指针来维护堆(heap)的映射空间(Mapped Region), 当需要未映射空间时, brk指针将向上移动获取更多的映射空间">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2018/03/26/5ab8f318e1a08.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/26/5ab8f7e87ca93.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/26/5ab8fb1263040.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/27/5ab9ea4ee5486.png">
+<meta property="og:image" content="https://i.loli.net/2018/03/27/5ab9eada0c8b5.png">
+<meta property="og:updated_time" content="2018-09-30T10:27:29.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于CS:APP的单片机malloc简单实现">
+<meta name="twitter:description" content="前言 当时接触malloc实现的这个任务时, 感觉难度挺大的, 以往从未深入地了解过所用malloc的真正实现. 这两天断断续续抽出时间阅读了CS:APP的相关章节部分以及阅读了大佬们Blog, 感觉有必要记录一下 malloc 简单原理及部分实现   系统通过brk指针来维护堆(heap)的映射空间(Mapped Region), 当需要未映射空间时, brk指针将向上移动获取更多的映射空间">
+<meta name="twitter:image" content="https://i.loli.net/2018/03/26/5ab8f318e1a08.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/26/malloc-on-microcontrollers/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>基于CS:APP的单片机malloc简单实现 | Welcome</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Welcome</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">A tiny sharing site</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/malloc-on-microcontrollers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thincats">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于CS:APP的单片机malloc简单实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-26 12:34:53" itemprop="dateCreated datePublished" datetime="2018-03-26T12:34:53+08:00">2018-03-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-30 18:27:29" itemprop="dateModified" datetime="2018-09-30T18:27:29+08:00">2018-09-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/System/" itemprop="url" rel="index"><span itemprop="name">System</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言">前言</h1>
+<p>当时接触<code>malloc</code>实现的这个任务时, 感觉难度挺大的, 以往从未深入地了解过所用<code>malloc</code>的真正实现. 这两天断断续续抽出时间阅读了CS:APP的相关章节部分以及阅读了大佬们Blog, 感觉有必要记录一下</p>
+<h1 id="malloc-简单原理及部分实现">malloc 简单原理及部分实现</h1>
+<p><img src="https://i.loli.net/2018/03/26/5ab8f318e1a08.png" style="zoom:60%"></p>
+<ol style="list-style-type: decimal">
+<li>系统通过<code>brk</code>指针来维护堆(heap)的映射空间(Mapped Region), 当需要未映射空间时, <code>brk</code>指针将向上移动获取更多的映射空间</li>
+</ol>
+<p><a id="more"></a></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><strong>堆与<code>brk</code>指针</strong></p></li>
+<li><p>堆有起点和终点, 也就是容量. 起点与终点可用两个指针来表示,<code>mem_start</code>, <code>mem_end</code></p></li>
+<li><p>映射空间也有起点与终点, 起点为<code>mem_start</code>, 终点为<code>brk</code>指针指向的地址, 通过<code>brk</code>的移动来拓展/收缩堆</p>
+<p><img src="https://i.loli.net/2018/03/26/5ab8f7e87ca93.png" style="zoom:75%"></p></li>
+<li><p><code>malloc</code> 管理着许多大小不同的块(Block), 块分布在堆上, 所以malloc()在堆上执行着它的工作. 块又未分配与分配的状态, 通过切分, 合并, 标记状态块来动态地分配与回收内存</p></li>
+<li><p>相关函数:</p>
+<ul>
+<li><p><code>void mem_init(void)</code> 初始化堆, 生成初<code>brk</code>指针, <code>mem_start</code>指针, <code>mem_end</code>指针. 单片机可用一个大数组来模拟堆实现(我猜的话)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_HEAP 512   	<span class="comment">// 堆的最大字节数</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *mem_start;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *mem_end;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *brk;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mem_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mem[MAX_HEAP/<span class="keyword">sizeof</span>(<span class="keyword">int</span>)]; <span class="comment">//数组模拟堆, 不需要初始化</span></span><br><span class="line">    mem_start = brk = (<span class="keyword">char</span> *)mem;</span><br><span class="line">    mem_end = (<span class="keyword">char</span> *)(mem_start +  MAX_HEAP - <span class="number">1</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​</p></li>
+<li><p><code>int mem_sbrk(void)</code> 移动<code>brk</code>指针<code>incr</code>(increment)次来拓展堆, 成功返回0, 错误时返回-1</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mem_sbrk</span><span class="params">(<span class="keyword">int</span> incr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(incr &lt; <span class="number">0</span> || brk + incr &gt; mem_end)   <span class="comment">// 这里只考虑拓展, 所以incr &gt; 0 , 当拓展超出边界时, 将会出错</span></span><br><span class="line">  	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">      brk += incr;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>​</p></li>
+</ul></li>
+<li><p><strong>块的构成</strong></p></li>
+</ol>
+<p>​</p>
+<ol style="list-style-type: decimal">
+<li><p>块可分为 <code>meta</code> 部分与<code>data</code>部分</p>
+<div class="figure">
+<img src="https://i.loli.net/2018/03/26/5ab8fb1263040.png" alt="块">
+<p class="caption">块</p>
+</div></li>
+</ol>
+<ul>
+<li><code>meta</code> 让 <code>malloc</code>识别并且执行某些特定的功能, <code>malloc</code>造成的内部碎片化也与 <code>meta</code>的大小有关, <code>meta</code>取决于实现 <code>malloc</code>的方式</li>
+<li><code>data</code>部分承载着数据, 可分为 <code>payload</code> 和<code>padding</code> 部分
+<ul>
+<li><p><code>payload</code>承载用户需要存放的数据, 这是主数据</p></li>
+<li><p><code>padding</code>起到填充作用, 目的是进行对齐操作[^对齐操作]</p></li>
+</ul>
+​</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p><code>meta</code> 部分的基本构成</p>
+<ol style="list-style-type: decimal">
+<li><code>malloc</code>的实现离不开<code>meta</code>的构造, 对从CS:APP书上所了解到的部分实现来说, <code>meta</code>基本上都含有头部(<code>header</code>), 根据需求增加脚部(footer), 指针部(Pointers)</li>
+</ol></li>
+<li><p><code>header</code>部:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>header</code> 部由两部分组成, <code>size</code>与<code>allocated</code>, 大小为 <code>单字</code></p>
+<ul>
+<li><code>size</code> 指定了<code>block</code> <strong>整个块</strong>的字节大小, 以此来确定下一块的位置.</li>
+<li><code>allocated</code> 由3个字节组成 <code>000</code>, 其中最后一位指示该块是否已经分配<code>001</code>, 基于优化, 第二位则指示前面的块是否分配<code>010</code>(节约了部分空间, 降低内部碎片化, 但增加了代码量)</li>
+</ul></li>
+<li><p>操作函数</p></li>
+<li><p>操作函数主要针对读取<code>size</code>部内容转化为大小, 读取<code>allocated</code>部判断是否分配, 确定下一块的位置, 为了通用性, 这里将每一块的<code>data</code>首地址作为块的首地址, 确定下一块的函数依照不同<code>meta</code>部分有所不同</p></li>
+<li><p><code>GET</code>函数: 读取指针所指内存空间的数据, 按照对齐方式进行(int对应的<code>字</code>对齐)</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bp: block pointer 块地址</span></span><br><span class="line"><span class="comment">// HDRP: header pointer 头部地址</span></span><br><span class="line"><span class="comment">// WSIZE: Word Size 字长</span></span><br><span class="line"><span class="comment">// DSIZE: Double words size 双字长</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WSIZE (sizeof(int))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DSIZE (2*WSIZE)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GET(p) (*(unsigned int *)(p))</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>HDRP</code> 函数: 读取<code>header</code>部地址</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HDRP(bp) ((char *)(bp) - WSIZE)</span></span><br></pre></td></tr></table></figure></p>
+<p>​</p></li>
+<li><p><code>GET_SIZE</code> 函数: 读取<code>size</code>内容并转换为块大小, 传递块指针 <code>bp</code></p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_SIZE(bp) ((GET(HDRP(bp))) &amp; ~0x7) <span class="comment">//0x7 == 0111</span></span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>GET_ALLOC_PRV</code>函数: 读取<code>allocated</code>内容并判断前一块是否已分配</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_ALLOC_PRV(bp) (GET(HDRP(bp)) &amp; 0x2) <span class="comment">//0x2 == 0010</span></span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>GET_ALLOC(bp)</code> 函数: 如上, 判断该块是否被分配</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_ALLOC(bp) (GET(HDRP(bp)) &amp; 0x1)	<span class="comment">//0x1 == 0001</span></span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>PUT</code>函数: 将数据写入相应的内存空间(以一个<code>字</code>为单位), 比如将新的<code>head</code>写入旧的<code>head</code>, 更新数据, 同样可以用在其它<code>meta</code>操作中</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PUT(p, val) (*(unsigned int *)(p) = (val))</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>PACK</code>函数: 封装数据, 将不同数据封装到一个单位中<code>字</code>, 比如<code>header</code>部分</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PACK(size, alloc) ((size) | (alloc))</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>NEXT_BLKP</code>函数: 通过<code>size</code>, 已知的<code>meta</code>数据大小, 起始<code>bp</code>来确定下一块的<code>bp</code>(块指针), 考虑到不同<code>meta</code>有不同实现, 暂不考虑.</p></li>
+</ol></li>
+<li><p><strong>malloc堆的构造</strong></p></li>
+</ol>
+<div class="figure">
+<img src="https://i.loli.net/2018/03/27/5ab9ea4ee5486.png" alt="堆">
+<p class="caption">堆</p>
+</div>
+<ol style="list-style-type: decimal">
+<li><p>两头由未使用区(unused), 尾区组成(end), 中间为可分配的区域, 类似链表一样组织块链</p>
+<div class="figure">
+<img src="https://i.loli.net/2018/03/27/5ab9eada0c8b5.png" alt="堆">
+<p class="caption">堆</p>
+</div></li>
+<li><p>Unused 区可分为无标记的一个<code>字</code> 长的<code>起始区</code>和被初始化为<code>size</code>值为8的两个<code>header</code>块的<code>序言块</code>组成, 用于标记可分配区的开始, 末尾块则被初始化为<code>size</code>值为0的<code>header</code>块, 用于表示该<code>mapped memory</code>的结束</p></li>
+<li><p>对齐:</p>
+<ol style="list-style-type: decimal">
+<li>分配空间使用<strong>整数倍的<code>双字</code></strong>来进行对齐</li>
+</ol></li>
+</ol>
+<h1 id="malloc工作模式">malloc工作模式</h1>
+<p>以 隐式空闲链表为例</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>放置已分配的块</strong></p></li>
+<li><p>即将用户需要的内存大小找到匹配的块并分配, 标记</p></li>
+<li><p>策略: 根据匹配方式, 可以分为3类</p>
+<ul>
+<li><strong>首次适配</strong>: 找到第一个可以匹配的块, 分配</li>
+<li><strong>最佳适配</strong>: 找到与用户需求最接近的块, 分配</li>
+<li><strong>下一次分配</strong>: 从上一次分配的块地址开始, 找到第一个合适的块</li>
+</ul></li>
+<li><p>搜索方式: 根据遍历搜索的方式, 又可分为几类, 这里以CS:APP提到的为主</p>
+<ol style="list-style-type: decimal">
+<li><strong>隐式链表法</strong>: 即没有专门的区块存放<code>指针区</code>, 可分配块按地址顺序排列, 寻址通过偏移值进行. 搜索为线性时间复杂度</li>
+<li><strong>分离适配</strong>: 可以使用显性链表, 即存放<code>指针区</code>. 将块的大小分为几个集合, 并生成不同的链表, 如将大小为<code>[2, 16]字</code>的块组合成<code>链表A</code>, 将<code>[18, 64]</code>组合成<code>链表B</code>, 当用户需求大小为 <code>4字</code>的内存空间时, 将从<code>链表A</code>中进行查找, 而非在整个堆中进行. 节省了时间. 同时, 按大小分类的适配方式可以近似模拟出最佳适配的效果.</li>
+</ol></li>
+<li><p>相关实现</p>
+<p>这里将采用首次适配与隐式链表法</p>
+<ol style="list-style-type: decimal">
+<li><p><code>SIZE_DATA</code>函数: 获得<code>data</code>部地址</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE_DATA(bp) (GET_SIZE(bp) - DSIZE) <span class="comment">//footer header共占DSIZE</span></span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>FTRP</code>函数: 读取<code>footer</code>地址</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FTRP(bp) ((char *)bp + SIZE_DATA(bp))</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>NEXT_BLKP</code>函数: 寻找下一块</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NEXT_BLKP(bp) ((char *)bp + GET_SIZE(bp))</span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>GET_SIZE_PRV</code>函数: 读取上一块<code>size</code>部</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GET_SIZE_PRV(bp) (GET((char *)bp - DSIZE) &amp; ~0X7) <span class="comment">//上一footer</span></span></span><br></pre></td></tr></table></figure></p></li>
+<li><p><code>PREV_BLKP</code>函数: 寻找上一块</p>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PREV_BLKP(bp) ((char *)bp - GET_SIZE_PRV(bp))</span></span><br></pre></td></tr></table></figure></p>
+<p>​</p></li>
+</ol></li>
+<li><p>分割空闲块</p></li>
+<li><p>当据<code>工作模式1</code>找到块时, 可能块的大小大于需求的内存空间, 此时, 为节约内存, 会将空闲块进行分割</p></li>
+</ol>
+<p>​</p>
+<hr>
+<p>最近更新于2018.3.26</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/26/hexo-install-mathjax/" rel="next" title="Mathjax on hexo">
+                <i class="fa fa-chevron-left"></i> Mathjax on hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/28/intsall-slide-drivers-for-win-tablet/" rel="prev" title="intsall-slide-drivers-for-win-tablet">
+                intsall-slide-drivers-for-win-tablet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Thincats</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#malloc-简单原理及部分实现"><span class="nav-number">2.</span> <span class="nav-text">malloc 简单原理及部分实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#malloc工作模式"><span class="nav-number">3.</span> <span class="nav-text">malloc工作模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thincats</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

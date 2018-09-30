@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="参考资料:   Visual Studio Code如何编写运行C、C++？ - 谭九鼎的回答 - 知乎 C/C++ for VS Code (Preview)  前言 今天去 ThoughtWorks 公司参观了一下, 看到了一些人在使用VS code进行前端的开发, 可能是受到它的颜值吸引, 想去试试, 所以准备配置VS code. 记录一下大致的流程以及遇到的问题. 流程  配置环境 安装">
+<meta name="keywords" content="config">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置VS code的C&#x2F;C++环境">
+<meta property="og:url" content="http://yoursite.com/2018/03/28/cpp-on-vscode/index.html">
+<meta property="og:site_name" content="Welcome">
+<meta property="og:description" content="参考资料:   Visual Studio Code如何编写运行C、C++？ - 谭九鼎的回答 - 知乎 C/C++ for VS Code (Preview)  前言 今天去 ThoughtWorks 公司参观了一下, 看到了一些人在使用VS code进行前端的开发, 可能是受到它的颜值吸引, 想去试试, 所以准备配置VS code. 记录一下大致的流程以及遇到的问题. 流程  配置环境 安装">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-30T10:27:29.657Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置VS code的C&#x2F;C++环境">
+<meta name="twitter:description" content="参考资料:   Visual Studio Code如何编写运行C、C++？ - 谭九鼎的回答 - 知乎 C/C++ for VS Code (Preview)  前言 今天去 ThoughtWorks 公司参观了一下, 看到了一些人在使用VS code进行前端的开发, 可能是受到它的颜值吸引, 想去试试, 所以准备配置VS code. 记录一下大致的流程以及遇到的问题. 流程  配置环境 安装">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/28/cpp-on-vscode/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>配置VS code的C/C++环境 | Welcome</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Welcome</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">A tiny sharing site</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/28/cpp-on-vscode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thincats">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Welcome">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">配置VS code的C/C++环境
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-28 20:39:17" itemprop="dateCreated datePublished" datetime="2018-03-28T20:39:17+08:00">2018-03-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-09-30 18:27:29" itemprop="dateModified" datetime="2018-09-30T18:27:29+08:00">2018-09-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/VS-code/" itemprop="url" rel="index"><span itemprop="name">VS code</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>参考资料:</p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.zhihu.com/question/30315894/answer/154979413" target="_blank" rel="noopener">Visual Studio Code如何编写运行C、C++？ - 谭九鼎的回答 - 知乎</a> <a href="https://code.visualstudio.com/docs/languages/cpp" target="_blank" rel="noopener">C/C++ for VS Code (Preview)</a></p>
+</blockquote>
+<h1 id="前言">前言</h1>
+<p>今天去 <code>ThoughtWorks</code> 公司参观了一下, 看到了一些人在使用VS code进行前端的开发, 可能是受到它的颜值吸引, 想去试试, 所以准备配置VS code. 记录一下大致的流程以及遇到的问题.</p>
+<h1 id="流程">流程</h1>
+<ol style="list-style-type: decimal">
+<li>配置环境</li>
+<li>安装VS Code 相关插件</li>
+<li>配置工作区相应插件的配置文件</li>
+<li>其他优化</li>
+</ol>
+<h1 id="详细操作">详细操作</h1>
+<ol style="list-style-type: decimal">
+<li>配置环境</li>
+</ol>
+<p>VS code对<code>Clang</code>的支持较好, 所以这里将根据知乎的教程配置<code>Clang</code>的环境</p>
+<ol style="list-style-type: decimal">
+<li>到 <a href="https://link.zhihu.com/?target=http%3A//releases.llvm.org/download.html" target="_blank" rel="noopener">LLVM</a> 下载并安装Clang, 配置环境变量</li>
+<li>到 <a href="https://link.zhihu.com/?target=https%3A//sourceforge.net/projects/mingw-w64/" target="_blank" rel="noopener">MinGW</a> 安装MinGW-w64 (MinGW似乎很久没维护, 而MinGW-w64正在维护)</li>
+<li><p><strong>合并</strong> 将安装好的MinGW根目录复制到<code>Clang</code> 中合并(即含bin, include文件夹), 合并是为了MinGW的头文件, 也可以不进行合并, 而在配置文件[^C配置文件]中修改</p></li>
+<li><p>安装 VS Code相关插件</p></li>
+</ol>
+<ul>
+<li>C/C++（就是有些教程里的cpptools）</li>
+<li>C/C++ Clang Command Adapter：提供静态检测（Lint）</li>
+<li>Code Runner</li>
+<li>Include Autocomplete：提供头文件补全</li>
+<li>C/C++ Snippets：Snippets 重用代码块</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>配置工作区相应插件的配置文件(四个json)</li>
+</ol>
+<blockquote>
+<p>参考<a href="https://www.zhihu.com/question/30315894/answer/154979413" target="_blank" rel="noopener">知乎</a>教程:</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><p>初始化某文件夹为工作区 (以工作区为单位的配置文件对工作区内的环境有效)</p></li>
+<li><p>在工作区下创建 <code>.vscode</code>文件夹 ( <code>.vscode</code> 文件夹将被VS code识别)</p></li>
+<li><p>在<code>.vscode</code>文件夹新建以下配置文件 (或者生成)</p>
+<ul>
+<li><p>新建<code>tasks.json</code> (可通过命令寻找: <code>Tasks: Configure...</code>生成)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// https://code.visualstudio.com/docs/editor/tasks</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>,</span><br><span class="line">    <span class="attr">"tasks"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            "label": "Compile", // 任务名称，与launch.json的preLaunchTask相对应</span><br><span class="line">            "command": "clang++", // 要使用的编译器</span><br><span class="line">            "args": [</span><br><span class="line">                "$&#123;file&#125;",</span><br><span class="line">                "-o", // 指定输出文件名，不加该参数则默认输出a.exe</span><br><span class="line">                "$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe",</span><br><span class="line">                "-g", // 生成和调试有关的信息</span><br><span class="line">                "-Wall", // 开启额外警告</span><br><span class="line">                "-static-libgcc", // 静态链接</span><br><span class="line">                "-fcolor-diagnostics",</span><br><span class="line">                "--target=x86_64-w64-mingw", // 默认target为msvc，不加这一条就会找不到头文件</span><br><span class="line">                "-std=c++17" // C语言最新标准为c11，或根据自己的需要进行修改</span><br><span class="line">            ], // 编译命令参数</span><br><span class="line">            "type": "shell",</span><br><span class="line">            "group": &#123;</span><br><span class="line">                "kind": "build",</span><br><span class="line">                "isDefault": true // 设为false可做到一个tasks.json配置多个编译指令，需要自己修改本文件，我这里不多提</span><br><span class="line">            &#125;,</span><br><span class="line">            "presentation": &#123;</span><br><span class="line">                "echo": true,</span><br><span class="line">                "reveal": "always", // 在“终端”中显示编译信息的策略，可以为always，silent，never。具体参见VSC的文档</span><br><span class="line">                "focus": false, // 设为true后可以使执行task时焦点聚集在终端，但对编译c和c++来说，设为true没有意义</span><br><span class="line">                "panel": "shared" // 不同的文件的编译信息共享一个终端面板</span><br><span class="line">            &#125;</span><br><span class="line">            // "problemMatcher":"$gcc" // 如果你不使用clang，去掉前面的注释符，并在上一条之后加个逗号。照着我的教程做的不需要改（也可以把这行删去)</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>新建 <code>launch.json</code> (用于调试)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// https://github.com/Microsoft/vscode-cpptools/blob/master/launch.md</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示</span><br><span class="line">            "type": "cppdbg", // 配置类型，这里只能为cppdbg</span><br><span class="line">            "request": "launch", // 请求配置类型，可以为launch（启动）或attach（附加）</span><br><span class="line">            "program": "$&#123;fileDirname&#125;/$&#123;fileBasenameNoExtension&#125;.exe", // 将要进行调试的程序的路径</span><br><span class="line">            "args": [], // 程序调试时传递给程序的命令行参数，一般设为空即可</span><br><span class="line">            "stopAtEntry": false, // 设为true时程序将暂停在程序入口处，我一般设置为true</span><br><span class="line">            "cwd": "$&#123;workspaceFolder&#125;", // 调试程序时的工作目录</span><br><span class="line">            "environment": [], // （环境变量？）</span><br><span class="line">            "externalConsole": true, // 调试时是否显示控制台窗口，一般设置为true显示控制台</span><br><span class="line">            "internalConsoleOptions": "neverOpen", // 如果不设为neverOpen，调试时会跳到“调试控制台”选项卡，你应该不需要对gdb手动输命令吧？</span><br><span class="line">            "MIMode": "gdb", // 指定连接的调试器，可以为gdb或lldb。但目前lldb在windows下没有预编译好的版本。</span><br><span class="line">            "miDebuggerPath": "gdb.exe", // 调试器路径。</span><br><span class="line">            "setupCommands": [</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="attr">"description"</span>: <span class="string">"Enable pretty-printing for gdb"</span>,</span><br><span class="line">                    <span class="attr">"text"</span>: <span class="string">"-enable-pretty-printing"</span>,</span><br><span class="line">                    <span class="attr">"ignoreFailures"</span>: <span class="literal">false</span></span><br><span class="line">                &#125;</span><br><span class="line">            ],</span><br><span class="line">            "preLaunchTask": "Compile" // 调试会话开始前执行的任务，一般为编译程序。与tasks.json的label相对应</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>c_cpp_properties.json</code>(用于配置头文件等)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Win32"</span>,</span><br><span class="line">            <span class="attr">"intelliSenseMode"</span>: <span class="string">"clang-x64"</span>,</span><br><span class="line">            <span class="attr">"includePath"</span>: [</span><br><span class="line">                <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/x86_64-w64-mingw32"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/backward"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/include"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/x86_64-w64-mingw32/include"</span>,</span><br><span class="line">                <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"defines"</span>: [</span><br><span class="line">                <span class="string">"_DEBUG"</span>,</span><br><span class="line">                <span class="string">"UNICODE"</span>,</span><br><span class="line">                <span class="string">"__GNUC__=7"</span>,</span><br><span class="line">                <span class="string">"__cdecl=__attribute__((__cdecl__))"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"browse"</span>: &#123;</span><br><span class="line">                <span class="attr">"path"</span>: [</span><br><span class="line">                    <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/x86_64-w64-mingw32"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include/c++/backward"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/include"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/x86_64-w64-mingw32/include"</span>,</span><br><span class="line">                    <span class="string">"C:/llvm/lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"</span></span><br><span class="line">                ],</span><br><span class="line">                <span class="attr">"limitSymbolsToIncludedHeaders"</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">"databaseFilename"</span>: <span class="string">""</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"version"</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>settings.json</code> (用于个性化设置, 如Clang的格式控制, 自动保存等)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">作者：知乎用户</span><br><span class="line">链接：https://www.zhihu.com/question/30315894/answer/154979413</span><br><span class="line">来源：知乎</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    "files.defaultLanguage": "cpp", // ctrl+N新建文件后默认的语言</span><br><span class="line"></span><br><span class="line">    "code-runner.runInTerminal": true, // 设置成false会在“输出”中输出，无法交互</span><br><span class="line">    "code-runner.executorMap": &#123;</span><br><span class="line">        "c": "cd $dir &amp;&amp; clang $fileName -o $fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c11 &amp;&amp; $dir$fileNameWithoutExt",</span><br><span class="line">        "cpp": "cd $dir &amp;&amp; clang++ $fileName -o $fileNameWithoutExt.exe -Wall -g -Og -static-libgcc -fcolor-diagnostics --target=x86_64-w64-mingw -std=c++17 &amp;&amp; $dir$fileNameWithoutExt"</span><br><span class="line">    &#125;, // 设置code runner的命令行</span><br><span class="line">    "code-runner.saveFileBeforeRun": true, // run code前保存</span><br><span class="line">    "code-runner.preserveFocus": true, // 若为false，run code后光标会聚焦到终端上。如果需要频繁输入数据可设为false</span><br><span class="line">    "code-runner.clearPreviousOutput": false, // 每次run code前清空属于code runner的终端消息</span><br><span class="line"></span><br><span class="line">    "C_Cpp.clang_format_sortIncludes": true, // 格式化时调整include的顺序（按字母排序）</span><br><span class="line">    "C_Cpp.intelliSenseEngine": "Default", // 可以为Default或Tag Parser，后者较老，功能较简单。具体差别参考cpptools插件文档</span><br><span class="line">    "C_Cpp.errorSquiggles": "Disabled", // 因为有clang的lint，所以关掉</span><br><span class="line">    "editor.formatOnType": true, // 输入时就进行格式化，默认触发字符较少，分号可以触发</span><br><span class="line">    "editor.snippetSuggestions": "top", // snippets代码优先显示补全</span><br><span class="line"></span><br><span class="line">    "clang.cflags": [ // 控制c语言静态检测的参数</span><br><span class="line">        "--target=x86_64-w64-mingw",</span><br><span class="line">        "-std=c11",</span><br><span class="line">        <span class="string">"-Wall"</span></span><br><span class="line">    ],</span><br><span class="line">    "clang.cxxflags": [ // 控制c++静态检测时的参数</span><br><span class="line">        "--target=x86_64-w64-mingw",</span><br><span class="line">        "-std=c++17",</span><br><span class="line">        <span class="string">"-Wall"</span></span><br><span class="line">    ],</span><br><span class="line">    "clang.completion.enable":false // 效果稍好，但太卡，故关掉</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+</ol>
+<h1 id="一些小问题">一些小问题</h1>
+<ol style="list-style-type: decimal">
+<li>先开始我的 <code>gdb</code>无法使用, 调试<code>exe</code>时出现了以下信息</li>
+</ol>
+<p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">not</span> in executable format: File format <span class="keyword">not</span> recognized</span><br></pre></td></tr></table></figure></p>
+<p>生成的exe确实可以运行的, 但无法调试, 后面找到原因:</p>
+<blockquote>
+<p>clang的架构是x86_64, 而gdb是for i686的, 两版本不同.</p>
+<p>解决即为重新安装x86_64的MinGW</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>在VS code需要使用intelliSense , 但<code>ctrl + space</code>无法使用</li>
+</ol>
+<blockquote>
+<p>中文输入法快捷键冲突了, 按下 <code>win + space</code>切换到英文输入法, 并换键盘布局为美式键盘(英式键盘布局有点不同)</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/config/" rel="tag"># config</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/28/intsall-slide-drivers-for-win-tablet/" rel="next" title="intsall-slide-drivers-for-win-tablet">
+                <i class="fa fa-chevron-left"></i> intsall-slide-drivers-for-win-tablet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/15/RedBlackTree/" rel="prev" title="Red-Black Tree">
+                Red-Black Tree <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Thincats</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#详细操作"><span class="nav-number">3.</span> <span class="nav-text">详细操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些小问题"><span class="nav-number">4.</span> <span class="nav-text">一些小问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Thincats</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

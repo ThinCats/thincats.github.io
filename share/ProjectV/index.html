@@ -1,0 +1,470 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>The Introduction of the Proxy Platform - By Thincats</title>
+    <link rel="stylesheet" media="all" href="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/css/phone.css">
+    
+    <link rel="stylesheet" href="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/css/font-awesome.css">
+    
+<link rel="stylesheet" href="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Introduction of the Proxy Platform</h1>
+<h2>E.g Project V</h2>
+<iframe src="http://ghbtns.com/github-btn.html?user=thincats&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="220" height="30" style="background-color: transparent; vertical-align: middle; position: relative; left: 40%; top: 30%"></iframe>
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>(*) For tranparent proxy, it&#39;s not anonymous</p>
+<p>(*) For reverse proxy, server is anonymous</p>
+<p>(*) It might be sniffed by bad guys</p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>The general Proxy</h2>
+<ul class="rollIn">
+<li>Clients &lt;--&gt; Proxy --&gt; Server</li>
+<li>non-direct connection</li>
+<li>For server, client is anonymous (*)</li>
+<li>Foward the packet (*)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>The general Proxy</h2>
+<ul>
+<li>Distributed Proxy<ul>
+<li>Clients &lt;--&gt; Proxy Network --&gt; Server</li>
+</ul>
+</li>
+<li>Reverse Proxy {:&amp;.rollIn}<ul>
+<li>Client --&gt; Proxy &lt;--&gt; Servers</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>The general Proxy</h2>
+<div class="label label-primary">Application Layer</div><div class="label label-danger">Transport Layer</div><div class="label label-default">Internet Layer</div><div class="label label-success">Link Layer</div>
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>Introduce the protocol</p>
+<p>(*) For avoiding Network blockade </p>
+<p>(*) Local: Basic Proxy Protocol; Remote: Self-designing Protocol</p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>SS Proxy</h2>
+<ul class="rollIn">
+<li>User -&gt; SS Client --&gt; SS Server --&gt; Source Server</li>
+<li>Seperation in Client and Server</li>
+<li>Confusion and Encryption (*)</li>
+<li>Protocol<ul>
+<li>1 For local, 1 For remote (*)</li>
+</ul>
+</li>
+</ul>
+<img src="./svg/Shadowsocks.svg" alt="SS">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>What is the Project V</h2>
+
+</hgroup><article>
+
+<ul>
+<li>Project V provides a set of tools{:&amp;.rollIn}</li>
+<li>To create your own network system</li>
+<li>To provide modules and tools, helping developers develop their own proxy application</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>V2Ray</h1>
+<h2>The core of Project V</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>V2Ray</h2>
+<h3>Single</h3>
+<img src="https://www.v2ray.com/resources/direct.svg" style="background-color: white;" />
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>V2Ray</h2>
+<h3>Bridge</h3>
+<img src="https://www.v2ray.com/resources/relay.svg" style="background-color: white;" />
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>V2Ray</h2>
+<h3>Structure</h3>
+<img src="https://www.v2ray.com/resources/arch.svg" alt="Structure">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<ul>
+<li>Application Layer</li>
+<li>Proxy Layer</li>
+<li>Transport Layer</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Structure</h2>
+<pre><code class="js">{
+    // Application Layer
+    &quot;log&quot;: {},
+    &quot;api&quot;: {},
+    &quot;dns&quot;: {},
+    &quot;stats&quot;: {},
+    &quot;routing&quot;: {},
+    &quot;policy&quot;: {},
+    // Proxy Layer
+    &quot;inbound&quot;: {},
+    &quot;outbound&quot;: {},
+    &quot;inboundDetour&quot;: [],
+    &quot;outboundDetour&quot;: [],
+    // Transport Layer
+    &quot;transport&quot;: {}
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Proxy Layer</h1>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p><img src="https://www.v2ray.com/resources/arch.svg" alt="Structure"></p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>Workflow</h2>
+<img src="https://www.v2ray.com/resources/internal.svg" alt="proxy">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Proxy Layer</h2>
+<pre><code class="js">{
+    &quot;inbound&quot;: {},
+    &quot;inboundDetour&quot;: [],
+    &quot;outbound&quot;: {},
+    &quot;outboundDetour&quot;: []
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>层与层之间分离不强</p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>Inbound</h2>
+<pre><code class="js">{
+    &quot;port&quot;: 1080,
+    &quot;listen&quot;: &quot;127.0.0.1&quot;,
+    &quot;protocol&quot;: &quot;&quot;,
+    &quot;settings&quot;: {},
+    &quot;streamSettings&quot;: {},
+    &quot;tag&quot;: &quot;&quot;,
+    &quot;sniffing&quot;: {
+        &quot;enabled&quot;: false,
+        &quot;destOverride&quot;: [&quot;http&quot;, &quot;tls&quot;]
+    }
+}
+</code></pre>
+<ul class="rollIn">
+<li>port &amp; listen: Listening address</li>
+<li>protocol &amp; settings: Settings on protocol</li>
+<li>streamSettings: Control the transport =&gt;</li>
+<li>tag: Identifier for routing</li>
+<li>sniffing: For detecting the type of packets</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p><img src="https://www.v2ray.com/resources/arch.svg" alt="Structure"></p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>Workflow</h2>
+<img src="https://www.v2ray.com/resources/internal.svg" alt="proxy">
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>chain Outbound: 实现链式Outbound， 接下来会有实例</p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>Outbound</h2>
+<pre><code class="js">{
+    &quot;tag&quot;: &quot;&quot;,
+    &quot;sendThrough&quot;: &quot;0.0.0.0&quot;,
+    &quot;protocol&quot;: &quot;&quot;,
+    &quot;settings&quot;: {},
+    &quot;streamSettings&quot;: {},
+    &quot;proxySettings&quot;: {
+    &quot;tag&quot;: &quot;another-outbound-tag&quot;
+    },
+    &quot;mux&quot;: {}
+}
+</code></pre>
+<ul class="rollIn">
+<li>sendThrough: The source Server=&gt; For server has many ip addresses</li>
+<li>proxySettings: Chain Outbound<ul>
+<li>tag: Specify the forward Outbound</li>
+</ul>
+</li>
+<li>mux: Multiplexing TCP</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Application Layer</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Structure</h2>
+<img src="https://www.v2ray.com/resources/arch.svg" alt="Structure">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Application Layer</h2>
+<pre><code class="js">&quot;log&quot;: {},
+    &quot;api&quot;: {},
+    &quot;stat&quot;: {},
+    &quot;routing&quot;: {},
+    &quot;dns&quot;: {},
+    &quot;policy&quot;: {}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>domainStrategy: Asis -&gt; Domain; Ip -&gt; ip</p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>Routing</h2>
+<pre><code class="js">{
+  &quot;strategy&quot;: &quot;rules&quot;,
+  &quot;settings&quot;: {
+    &quot;domainStrategy&quot;: &quot;AsIs&quot;,
+    &quot;rules&quot;: [
+      {
+        &quot;type&quot;: &quot;field&quot;,
+        &quot;domain&quot;: [
+          &quot;gov.cn&quot;,
+          &quot;edu.cn&quot;
+        ],
+        &quot;outboundTag&quot;: &quot;direct&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Rules</h2>
+<pre><code class="js">{
+  &quot;type&quot;: &quot;field&quot;,
+  &quot;domain&quot;: [
+    &quot;gov.cn&quot;,
+    &quot;edu.cn&quot;,
+    &quot;geosite:cn&quot;
+  ],
+  &quot;port&quot;: &quot;0-100&quot;,
+  &quot;network&quot;: &quot;tcp&quot;,
+  &quot;inboundTag&quot;: [
+    &quot;tag-direct&quot;
+  ],
+  &quot;protocol&quot;:[&quot;http&quot;, &quot;tls&quot;, &quot;bittorrent&quot;],
+  &quot;outboundTag&quot;: &quot;direct&quot;
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Examples</h1>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p><img src="https://www.v2ray.com/resources/arch.svg" alt="Structure"></p>
+
+</section>
+</aside><section class="slide-wrapper"><article>
+<h2>Workflow</h2>
+<img src="https://www.v2ray.com/resources/internal.svg" alt="proxy">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Basic</h2>
+<img src="./svg/Basic.svg" alt="Basic">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Proxy Chain</h2>
+<img src="./svg/ProxyChain.svg" alt="ProxyChain">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>ProxySetting</h2>
+<img src="./svg/ProxySetting.svg" alt="ProxySetting">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Routing</h2>
+<img src="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/svg/Routing.svg" alt="Routing">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Source Code</h1>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Golang Basic</h2>
+<pre><code class="go">// Variable declaration
+// var identifier type_name
+var num1 int
+var num2 = 3
+num3 := 3
+
+// Array and Pointer declaration
+// var var_name [SIZE] | * var_type
+var num_arr [12]* int // pointer array
+var point_arr *[12] int // array pointer
+
+// Struct and Interface declaration
+// type identifier struct | interface
+type student struct {}
+type Inbound interface {}
+
+// Function declaration
+// func indentifier([para list]) return_type
+func swap(a, b int) (int, int) {
+    return b, a
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Inbound</h2>
+<pre><code class="go">// An Inbound processes inbound connections.
+type Inbound interface {
+    // Network returns a list of network that this inbound supports. 
+    // Connections with not-supported networks will not be passed into Process().
+    Network() net.NetworkList
+
+    // Process processes a connection of given network. 
+    // If necessary, the Inbound can dispatch the connection to an Outbound.
+    Process(context.Context, net.Network, internet.Connection, core.Dispatcher) error
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Outbound</h2>
+<pre><code class="go">type Outbound interface {
+    // Process processes the given connection. 
+    // The given dialer may be used to dial a system outbound connection.
+    Process(context.Context, *core.Link, Dialer) error
+}
+</code></pre>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = "https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/js/mixjs/lib/event/broadcast.js"></script>
+<script src="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'fadeIn',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="https://cdn.rawgit.com/ksky521/nodeppt/5c647555/assets/js/zoom.js"></script>
+
+<!--placeholder-->
+</body>
+</html>
