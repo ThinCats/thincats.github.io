@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['g',['g',['../d9/dd4/struct_c_n_s.html#a89d56cfb935490e9fe2185fc2426dd0b',1,'CNS::g()'],['../d9/d1e/structmrep__struct.html#aacd7582261753046d03cbe6461dbe6cf',1,'mrep_struct::g()'],['../de/d3b/structmrdk__struct.html#a69a2a46a3ec7543c4de89cb69cb7b194',1,'mrdk_struct::g()'],['../d7/d61/structmlnk__struct.html#abf8aa26bdc99a58fa2fc95a746ed06c0',1,'mlnk_struct::g()'],['../d4/d1e/structmlay__struct.html#a92ad4b97360c8b4038aa100d517b4fd6',1,'mlay_struct::g()'],['../d2/d3f/structmdbg__struct.html#a90babe12a75d7a1912c2a7f530982561',1,'mdbg_struct::g()'],['../da/de9/structmclp__struct.html#adaafe8da0c40e189005b93b2bc0cb34f',1,'mclp_struct::g()'],['../df/d88/structmupd__struct.html#a58153ed92706c64749761b000fb48f2a',1,'mupd_struct::g()'],['../dd/db2/structmcns__struct.html#a21b7242f6ca34ed9beb3baaadcb8788c',1,'mcns_struct::g()']]],
+  ['g_5fdefr',['g_defr',['../d6/d1c/ksw_8c.html#add79ed614f910c5fcae1eead30104f28',1,'ksw.c']]],
+  ['gap',['gap',['../d4/de7/structkbm__cell__t.html#af84fc92178789ff7b3b575b5f6917b2b',1,'kbm_cell_t::gap()'],['../dc/d4c/structkbm__map__t.html#a643636814702aab6472893089b566976',1,'kbm_map_t::gap()']]],
+  ['ge_5fptr_5fref_5fnull',['GE_PTR_REF_NULL',['../d4/deb/general__graph_8h.html#a1e7f26e642f801fb4c671aad1740dddb',1,'general_graph.h']]],
+  ['ge_5fvec_5fref_5fnull',['GE_VEC_REF_NULL',['../d4/deb/general__graph_8h.html#a0e008cdb078fd1cef9dd98a210796ac1',1,'general_graph.h']]],
+  ['geedgehash_5fobj_5fdesc',['geedgehash_obj_desc',['../d4/deb/general__graph_8h.html#aadd536dedfe4904abebf6dd18c7639a8',1,'general_graph.h']]],
+  ['geedgerefv_5fobj_5fdesc',['geedgerefv_obj_desc',['../d4/deb/general__graph_8h.html#a093316b1a80be698d27f1eaca867c5f9',1,'general_graph.h']]],
+  ['geedgev_5fobj_5fdesc',['geedgev_obj_desc',['../d4/deb/general__graph_8h.html#a93fcd1b9ad4b8d79b81d0486d543829d',1,'general_graph.h']]],
+  ['genodev_5fobj_5fdesc',['genodev_obj_desc',['../d4/deb/general__graph_8h.html#ae539c8d810c39446dc338eae99fa2949',1,'general_graph.h']]],
+  ['genome_5fsize',['genome_size',['../d4/dd4/struct_graph.html#a2618e4fb61506bc990700b25a945169a',1,'Graph']]],
+  ['geptrrefv_5fobj_5fdesc',['geptrrefv_obj_desc',['../d4/deb/general__graph_8h.html#a6956ce29ff8b196b7fe96ae6925f6534',1,'general_graph.h']]],
+  ['gevecrefv_5fobj_5fdesc',['gevecrefv_obj_desc',['../d4/deb/general__graph_8h.html#a7c562fd2b4c51b89974355ee11341041',1,'general_graph.h']]],
+  ['gidx',['gidx',['../da/d3b/structlink__grp__t.html#aeebd0221ed4f38f4f2035946c3271d94',1,'link_grp_t']]],
+  ['gnidx',['gnidx',['../d9/d6b/structbdp__link__t.html#ad7c93337d0e82ce9ac368fd560c13fee',1,'bdp_link_t']]],
+  ['group',['group',['../d5/de9/structsg__tip__t.html#a3a9a9f40b32b6643c07469d6fe7d8fbf',1,'sg_tip_t']]],
+  ['grps',['grps',['../d3/d6c/struct_f_b_g.html#adde6eca16e565c7b3a8a8eacd7f0246d',1,'FBG']]]
+];

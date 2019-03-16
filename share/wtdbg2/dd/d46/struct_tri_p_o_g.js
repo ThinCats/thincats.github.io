@@ -1,0 +1,26 @@
+var struct_tri_p_o_g =
+[
+    [ "cns", "dd/d46/struct_tri_p_o_g.html#a86fea574701482336f9f406722945dc6", null ],
+    [ "fail_skip", "dd/d46/struct_tri_p_o_g.html#a9d8e2801785bbd9b7919dd4578c0d8cb", null ],
+    [ "is_tripog", "dd/d46/struct_tri_p_o_g.html#a056b192447c792355f5d4a019d6aa69a", null ],
+    [ "kdup", "dd/d46/struct_tri_p_o_g.html#a23b86eee3fe024344d3c9c091ed1981e", null ],
+    [ "keqs", "dd/d46/struct_tri_p_o_g.html#a36d97b0c245d56962e5a27223aee7531", null ],
+    [ "khash", "dd/d46/struct_tri_p_o_g.html#a7e4887e7d890bede7e51ec5b1c1b79d3", null ],
+    [ "kidxs", "dd/d46/struct_tri_p_o_g.html#ae03fcfb5cfc27f0455b10eef2379f727", null ],
+    [ "kords", "dd/d46/struct_tri_p_o_g.html#ae5114fd60a6ad859720cf58b7c391b7e", null ],
+    [ "ksize", "dd/d46/struct_tri_p_o_g.html#a1c6ae22b7f1b735f68c1758fae5c0df9", null ],
+    [ "longest_idx", "dd/d46/struct_tri_p_o_g.html#a478c52992d8286a80100c56590d81d37", null ],
+    [ "matrix", "dd/d46/struct_tri_p_o_g.html#af03ebd868ad52c537a3a133806b8bc6a", null ],
+    [ "pogs", "dd/d46/struct_tri_p_o_g.html#ac8d6b431ad59f0415eeae6550594bc9b", null ],
+    [ "qry", "dd/d46/struct_tri_p_o_g.html#ac5166e434d10f8d87a3f6f6b4ad814ab", null ],
+    [ "rbegs", "dd/d46/struct_tri_p_o_g.html#a6c1baf2982fd80c88c23ae30a48f7d19", null ],
+    [ "ref", "dd/d46/struct_tri_p_o_g.html#a042f7601fd117ecee63468c8c66a5707", null ],
+    [ "refmode", "dd/d46/struct_tri_p_o_g.html#a9088bdba549f112c4329128820033143", null ],
+    [ "regs", "dd/d46/struct_tri_p_o_g.html#ae8064c9cdbfe6abfa625c1bfefa5c30e", null ],
+    [ "rends", "dd/d46/struct_tri_p_o_g.html#ab8824e06740a653562e3ac4b868f785f", null ],
+    [ "seqmax", "dd/d46/struct_tri_p_o_g.html#aaddd57f07b22a8474c9702819ea5799f", null ],
+    [ "seqs", "dd/d46/struct_tri_p_o_g.html#a40f538632a84df1b490101422ebe2489", null ],
+    [ "shuffle", "dd/d46/struct_tri_p_o_g.html#ae9c149d02818e41199f47088a1b34ce4", null ],
+    [ "winlen", "dd/d46/struct_tri_p_o_g.html#a11cd474b30c0501b9472606f478c05ae", null ],
+    [ "winmin", "dd/d46/struct_tri_p_o_g.html#a3bd9ed66c27fb69c567eb0e903228d73", null ]
+];
