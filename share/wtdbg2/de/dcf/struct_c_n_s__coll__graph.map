@@ -1,0 +1,28 @@
+<map id="CNS" name="CNS">
+<area shape="rect" id="node1" title=" " alt="" coords="703,241,752,268"/>
+<area shape="rect" id="node2" href="$d1/d18/struct_string.html" title=" " alt="" coords="529,8,589,35"/>
+<area shape="rect" id="node3" href="$d7/d3e/structdbgcnsdpv.html" title=" " alt="" coords="513,59,605,85"/>
+<area shape="rect" id="node4" href="$d8/d0f/structdbgcns__dp__t.html" title=" " alt="" coords="233,5,335,32"/>
+<area shape="rect" id="node5" href="$dc/ddd/structblkv.html" title=" " alt="" coords="534,109,585,136"/>
+<area shape="rect" id="node6" href="$d5/d2f/structblk__t.html" title=" " alt="" coords="257,56,311,83"/>
+<area shape="rect" id="node7" href="$d2/d39/struct_d_b_g.html" title=" " alt="" coords="534,160,585,187"/>
+<area shape="rect" id="node8" href="$d0/daf/structdbgcnskmerv.html" title=" " alt="" coords="229,107,339,133"/>
+<area shape="rect" id="node9" href="$d8/d6a/structdbgcns__kmer__t.html" title=" " alt="" coords="5,107,127,133"/>
+<area shape="rect" id="node10" href="$d0/d39/structdbgcnskmerhash.html" title=" " alt="" coords="217,157,351,184"/>
+<area shape="rect" id="node11" href="$d4/d8d/struct_bit_vec.html" title=" " alt="" coords="35,256,97,283"/>
+<area shape="rect" id="node13" href="$d5/d10/structdbgcnsdphash.html" title=" " alt="" coords="375,320,489,347"/>
+<area shape="rect" id="node17" href="$d8/dec/structfbgkmerh.html" title=" " alt="" coords="241,407,327,433"/>
+<area shape="rect" id="node12" href="$d6/d1f/structu1v.html" title=" " alt="" coords="261,208,307,235"/>
+<area shape="rect" id="node14" href="$d3/d6c/struct_f_b_g.html" title=" " alt="" coords="535,365,583,392"/>
+<area shape="rect" id="node15" href="$da/d90/structrdkmerv.html" title=" " alt="" coords="245,559,323,585"/>
+<area shape="rect" id="node16" href="$d9/d09/structrd__kmer__t.html" title=" " alt="" coords="22,559,110,585"/>
+<area shape="rect" id="node18" href="$d3/da8/structfbg__kmer__t.html" title=" " alt="" coords="18,407,114,433"/>
+<area shape="rect" id="node19" href="$db/d2c/structfbglinkv.html" title=" " alt="" coords="247,356,321,383"/>
+<area shape="rect" id="node20" href="$d6/d84/structfbg__link__t.html" title=" " alt="" coords="23,356,109,383"/>
+<area shape="rect" id="node21" href="$d5/dca/structfbgedgev.html" title=" " alt="" coords="243,457,325,484"/>
+<area shape="rect" id="node22" href="$db/dc7/structfbg__edge__t.html" title=" " alt="" coords="19,457,113,484"/>
+<area shape="rect" id="node23" href="$df/db2/structlinkgrpv.html" title=" " alt="" coords="247,508,321,535"/>
+<area shape="rect" id="node24" href="$da/d3b/structlink__grp__t.html" title=" " alt="" coords="23,508,109,535"/>
+<area shape="rect" id="node25" href="$dd/d36/structb4v.html" title=" " alt="" coords="536,416,583,443"/>
+<area shape="rect" id="node26" href="$d1/dcf/structu4v.html" title=" " alt="" coords="536,467,583,493"/>
+</map>

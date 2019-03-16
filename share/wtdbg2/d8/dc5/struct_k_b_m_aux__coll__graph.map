@@ -1,0 +1,40 @@
+<map id="KBMAux" name="KBMAux">
+<area shape="rect" id="node1" title=" " alt="" coords="580,553,656,580"/>
+<area shape="rect" id="node2" href="$d1/d18/struct_string.html" title=" " alt="" coords="414,5,474,32"/>
+<area shape="rect" id="node3" href="$d8/d6e/struct_k_b_m.html" title=" " alt="" coords="419,705,469,732"/>
+<area shape="rect" id="node4" href="$dc/d2e/structkbmhash.html" title=" " alt="" coords="208,868,291,895"/>
+<area shape="rect" id="node5" href="$d4/d8d/struct_bit_vec.html" title=" " alt="" coords="26,487,89,513"/>
+<area shape="rect" id="node7" href="$dd/d59/structcuhash.html" title=" " alt="" coords="215,716,283,743"/>
+<area shape="rect" id="node28" href="$dd/dd8/struct_k_b_m_d_p.html" title=" " alt="" coords="409,251,479,277"/>
+<area shape="rect" id="node32" href="$d8/df8/structkbmphash.html" title=" " alt="" coords="204,221,295,248"/>
+<area shape="rect" id="node6" href="$d5/dcc/structkbm__kmer__t.html" title=" " alt="" coords="5,940,109,967"/>
+<area shape="rect" id="node27" href="$db/d75/structkbm__ref__t.html" title=" " alt="" coords="205,1020,293,1047"/>
+<area shape="rect" id="node8" href="$da/d06/structcuhash__t.html" title=" " alt="" coords="17,716,97,743"/>
+<area shape="rect" id="node9" href="$d0/d94/structkbmkauxv.html" title=" " alt="" coords="204,919,295,945"/>
+<area shape="rect" id="node10" href="$d5/d92/structkbm__kaux__t.html" title=" " alt="" coords="6,1031,109,1057"/>
+<area shape="rect" id="node11" href="$d0/df5/struct_base_bank.html" title=" " alt="" coords="206,501,293,528"/>
+<area shape="rect" id="node12" href="$d4/dab/structkbmbmerv.html" title=" " alt="" coords="203,767,296,793"/>
+<area shape="rect" id="node13" href="$d0/dd8/structkbm__bmer__t.html" title=" " alt="" coords="5,767,109,793"/>
+<area shape="rect" id="node14" href="$d2/d75/structkbmbinv.html" title=" " alt="" coords="210,817,289,844"/>
+<area shape="rect" id="node15" href="$d3/d35/structkbm__bin__t.html" title=" " alt="" coords="12,869,103,896"/>
+<area shape="rect" id="node16" href="$d6/d94/structkbmbauxv.html" title=" " alt="" coords="204,615,295,641"/>
+<area shape="rect" id="node17" href="$d3/d18/structkbm__baux__t.html" title=" " alt="" coords="6,615,109,641"/>
+<area shape="rect" id="node18" href="$d0/d13/struct_k_b_m_par.html" title=" " alt="" coords="214,969,285,996"/>
+<area shape="rect" id="node19" href="$df/d4e/structkbmreadv.html" title=" " alt="" coords="205,665,293,692"/>
+<area shape="rect" id="node20" href="$d1/d66/structkbm__read__t.html" title=" " alt="" coords="8,665,107,692"/>
+<area shape="rect" id="node21" href="$d7/d37/structkbmdpev.html" title=" " alt="" coords="208,65,291,92"/>
+<area shape="rect" id="node22" href="$dd/dcf/structkbm__dpe__t.html" title=" " alt="" coords="10,65,105,92"/>
+<area shape="rect" id="node23" href="$d2/d16/structkbmmapv.html" title=" " alt="" coords="400,1071,488,1097"/>
+<area shape="rect" id="node24" href="$dc/d4c/structkbm__map__t.html" title=" " alt="" coords="200,1071,299,1097"/>
+<area shape="rect" id="node25" href="$d9/d7e/struct_bits_vec.html" title=" " alt="" coords="409,1121,479,1148"/>
+<area shape="rect" id="node26" href="$dc/d42/structkbmrefv.html" title=" " alt="" coords="405,1020,483,1047"/>
+<area shape="rect" id="node29" href="$d4/d71/structkbmcmerv.html" title=" " alt="" coords="203,272,295,299"/>
+<area shape="rect" id="node30" href="$d7/d0a/structkbm__cmer__t.html" title=" " alt="" coords="6,295,109,321"/>
+<area shape="rect" id="node31" href="$d7/d66/struct_bit2_vec.html" title=" " alt="" coords="214,120,285,147"/>
+<area shape="rect" id="node33" href="$de/db6/structkbm__path__t.html" title=" " alt="" coords="8,189,107,216"/>
+<area shape="rect" id="node34" href="$d4/d20/structkbmcellv.html" title=" " alt="" coords="208,171,291,197"/>
+<area shape="rect" id="node35" href="$d4/de7/structkbm__cell__t.html" title=" " alt="" coords="11,139,104,165"/>
+<area shape="rect" id="node36" href="$d1/dcf/structu4v.html" title=" " alt="" coords="226,400,273,427"/>
+<area shape="rect" id="node37" href="$d6/d5b/structkmeroffv.html" title=" " alt="" coords="403,1172,485,1199"/>
+<area shape="rect" id="node38" href="$d2/d70/structkmer__off__t.html" title=" " alt="" coords="203,1172,295,1199"/>
+</map>

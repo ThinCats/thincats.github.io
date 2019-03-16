@@ -1,0 +1,19 @@
+<map id="SAMBlock" name="SAMBlock">
+<area shape="rect" id="node1" title=" " alt="" coords="424,305,511,332"/>
+<area shape="rect" id="node2" href="$d0/db6/structlayseqr.html" title=" " alt="" coords="109,215,180,241"/>
+<area shape="rect" id="node3" href="$df/d62/structlay__seq__t.html" title=" " alt="" coords="5,109,89,136"/>
+<area shape="rect" id="node4" href="$d0/df5/struct_base_bank.html" title=" " alt="" coords="41,5,128,32"/>
+<area shape="rect" id="node11" href="$df/d0f/struct_seq_bank.html" title=" " alt="" coords="323,215,401,241"/>
+<area shape="rect" id="node5" href="$d0/d01/struct_file_reader.html" title=" " alt="" coords="604,215,693,241"/>
+<area shape="rect" id="node6" href="$d1/d18/struct_string.html" title=" " alt="" coords="548,109,608,136"/>
+<area shape="rect" id="node7" href="$d5/dbf/struct_v_strv.html" title=" " alt="" coords="632,109,689,136"/>
+<area shape="rect" id="node8" href="$d4/d3c/struct_v_string.html" title=" " alt="" coords="623,5,693,32"/>
+<area shape="rect" id="node9" href="$d3/d1b/structfilesrcv.html" title=" " alt="" coords="719,109,789,136"/>
+<area shape="rect" id="node10" href="$da/d8c/structfile__src__t.html" title=" " alt="" coords="717,5,797,32"/>
+<area shape="rect" id="node12" href="$dd/d59/structcuhash.html" title=" " alt="" coords="211,109,279,136"/>
+<area shape="rect" id="node13" href="$da/d06/structcuhash__t.html" title=" " alt="" coords="159,5,239,32"/>
+<area shape="rect" id="node14" href="$d4/d8d/struct_bit_vec.html" title=" " alt="" coords="264,5,327,32"/>
+<area shape="rect" id="node15" href="$d2/d35/structu8v.html" title=" " alt="" coords="303,109,349,136"/>
+<area shape="rect" id="node16" href="$d5/da7/structcplist.html" title=" " alt="" coords="373,109,431,136"/>
+<area shape="rect" id="node17" href="$d1/dcf/structu4v.html" title=" " alt="" coords="473,109,520,136"/>
+</map>

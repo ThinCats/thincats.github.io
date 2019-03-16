@@ -1,0 +1,28 @@
+var struct_k_b_m_par =
+[
+    [ "aln_var", "d0/d13/struct_k_b_m_par.html#a133d644fdfcfbe3462dcc31053ef335d", null ],
+    [ "kmax", "d0/d13/struct_k_b_m_par.html#a429459dfac6f2d3457fa5f6206845fe2", null ],
+    [ "kmer_mod", "d0/d13/struct_k_b_m_par.html#a567ad1e6faac2203d80293188ac7adf4", null ],
+    [ "kmin", "d0/d13/struct_k_b_m_par.html#a34fc27178daf222614664f384790c313", null ],
+    [ "ksampling", "d0/d13/struct_k_b_m_par.html#a23debd2432af1e306587aec182bf2c04", null ],
+    [ "ksize", "d0/d13/struct_k_b_m_par.html#ac17e91862b6fffcdc515c70e0e18e43c", null ],
+    [ "ktop", "d0/d13/struct_k_b_m_par.html#ac90e656f3b5c7a9e98a543d1a4fe4f9a", null ],
+    [ "max_bcnt", "d0/d13/struct_k_b_m_par.html#a17ee8c567dd0ea57808287d6a6a6754a", null ],
+    [ "max_bgap", "d0/d13/struct_k_b_m_par.html#aa21b02f830a959c2ac050a5ce41e5b7f", null ],
+    [ "max_bvar", "d0/d13/struct_k_b_m_par.html#a7a6e1b81360a18c93343abf84ce0a9a7", null ],
+    [ "max_gap", "d0/d13/struct_k_b_m_par.html#afb297452a32e2bf9a64f52614c328d3a", null ],
+    [ "max_hit", "d0/d13/struct_k_b_m_par.html#a5a2b474dbe11462f5f417bac1b5d3a15", null ],
+    [ "min_aln", "d0/d13/struct_k_b_m_par.html#af95eb86c0adf841476e32e2e1e2435a6", null ],
+    [ "min_bin_degree", "d0/d13/struct_k_b_m_par.html#ad8130d99492e12effe55400fce4b6719", null ],
+    [ "min_mat", "d0/d13/struct_k_b_m_par.html#a94f970730cae0eba2ff2331bb9514d52", null ],
+    [ "min_sim", "d0/d13/struct_k_b_m_par.html#a3485cf6c4c02615178cfbfac9abe0f18", null ],
+    [ "pgap", "d0/d13/struct_k_b_m_par.html#a8ff6ca52bfc974db28d0636de2a8cea2", null ],
+    [ "psize", "d0/d13/struct_k_b_m_par.html#a686f18fe5cbe5cfedd42ef9784110273", null ],
+    [ "pvar", "d0/d13/struct_k_b_m_par.html#aaf5af1aba54fa359cf0d7af903cf1088", null ],
+    [ "rd_len_order", "d0/d13/struct_k_b_m_par.html#a91ef499d95b2b07996f7dea31164271c", null ],
+    [ "self_aln", "d0/d13/struct_k_b_m_par.html#adfbf2839805f154f74324485cf8887ec", null ],
+    [ "skip_contained", "d0/d13/struct_k_b_m_par.html#a6479747f06fecb6374b08147fe1b65de", null ],
+    [ "strand_mask", "d0/d13/struct_k_b_m_par.html#a8623b7b9dd6e39090f6bbf442bbde25e", null ],
+    [ "test_mode", "d0/d13/struct_k_b_m_par.html#a538ba63159177d987bf66472b4d55ec4", null ],
+    [ "use_kf", "d0/d13/struct_k_b_m_par.html#a10ff181e6ac0bb22bef8c1b307491a6b", null ]
+];
